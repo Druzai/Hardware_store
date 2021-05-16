@@ -2,6 +2,7 @@ package com.spring.controllers;
 
 import com.spring.models.Product;
 import com.spring.services.ProductSiteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/products", produces = "application/json")
 public class ProductSiteController {
-    private final ProductSiteService service;
-
-    public ProductSiteController(ProductSiteService service) {
-        this.service = service;
-    }
+    @Autowired
+    private ProductSiteService service;
 
     @GetMapping
     public List<Product> getAllProducts() {
@@ -40,7 +38,7 @@ public class ProductSiteController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping(path = "/update/{id}")
+    @PostMapping(path = "/update/{id}")
     public Product updateProduct(@PathVariable("id") int vendorId, @RequestParam String name,
                               @RequestParam String description, @RequestParam String brand,
                               @RequestParam String material, @RequestParam String manufacturerCountry,
