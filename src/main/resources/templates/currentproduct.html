@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>
+
+    <title th:text="${product.name} + ' | Hardware store'"></title>
+</head>
+<body>
+<nav th:replace="/parts/navbar :: navbar"></nav>
+<script type="text/javascript" th:src="@{/js/setActiveNavLink.js/}"></script>
+
+<div class="container mt-5 mb-5">
+  <h1 align="center" style="alignment: center" th:text="'Сведения по товару ' + ${product.name}"></h1>
+
+  <div class="bg-light mt-2" style="margin: 10px; border-radius: 7px">
+    <h3 th:text="'Название: ' + ${product.name}"></h3>
+    <p th:text="'Брэнд: ' + ${product.brand}"></p>
+    <p th:text="'Материал: ' + ${product.material}"></p>
+    <p th:text="'Страна изготовления: ' + ${product.manufacturerCountry}"></p>
+    <p th:text="'Категория: ' + ${product.category}"></p>
+    <p th:text="'Цена: ' + ${product.price} + ' руб.'"></p>
+    <p th:text="'Вес: ' + ${product.weight} + ' кг'"></p>
+    <p th:text="'Описание: ' + ${product.description}"></p>
+    <form action="/Cart" method="post">
+      <input type="hidden" name="vendorCode" th:value="${product.vendorCode}">
+      <button type="submit" class="btn btn-primary btn-small"
+              style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
+      </button>
+    </form>
+  </div>
+</div>
+
+<footer th:replace="/parts/footer :: footer"></footer>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
+</body>
+</html>

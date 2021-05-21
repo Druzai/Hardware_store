@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,22 @@ public class ProductSiteService {
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    public List<List<Product>> getAllSortedProducts(){
+        var oldList = productRepository.findAll();
+        int count = 0;
+        List<List<Product>> sorted_list = new ArrayList<>();
+        while (oldList.size() > count){
+            try{
+                sorted_list.add(oldList.subList(count, count + 3));
+            }
+            catch (IndexOutOfBoundsException ex){
+                sorted_list.add(oldList.subList(count, oldList.size()));
+            }
+            count += 3;
+        }
+        return sorted_list;
     }
 
     public Optional<Product> getProduct(int vendorId) {

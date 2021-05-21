@@ -12,6 +12,8 @@ public class Product {
     @Id
     @GeneratedValue
     private int vendorCode;
+//    @Lob
+//    private byte[] imageBytes;
     private String name;
     private String description;
     private String brand;
