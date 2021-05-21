@@ -13,25 +13,63 @@
 <nav th:replace="/parts/navbar :: navbar"></nav>
 
 <div class="container mt-5 mb-5">
-  <h1 align="center" style="alignment: center" th:text="'Сведения по товару ' + ${product.name}"></h1>
+    <h1 align="center" style="alignment: center" th:text="'Сведения по товару ' + ${product.name}"></h1>
 
-  <div class="bg-light mt-2" style="margin: 10px; border-radius: 7px">
-    <h2 th:text="'Арктикул: ' + ${product.vendorCode}"></h2>
-    <h3 th:text="'Название: ' + ${product.name}"></h3>
-    <p th:text="'Брэнд: ' + ${product.brand}"></p>
-    <p th:text="'Материал: ' + ${product.material}"></p>
-    <p th:text="'Страна изготовления: ' + ${product.manufacturerCountry}"></p>
-    <p th:text="'Категория: ' + ${product.category}"></p>
-    <p th:text="'Цена: ' + ${product.price} + ' руб.'"></p>
-    <p th:text="'Вес: ' + ${product.weight} + ' кг'"></p>
-    <p th:text="'Описание: ' + ${product.description}"></p>
-    <form action="/Cart" method="post">
-      <input type="hidden" name="vendorCode" th:value="${product.vendorCode}">
-      <button type="submit" class="btn btn-primary btn-small"
-              style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
-      </button>
-    </form>
-  </div>
+    <div th:if="${!adminUser}" class="bg-light mt-2" style="margin: 10px; border-radius: 7px">
+        <h2 th:text="'Арктикул: ' + ${product.vendorCode}"></h2>
+        <h3 th:text="'Название: ' + ${product.name}"></h3>
+        <p th:text="'Брэнд: ' + ${product.brand}"></p>
+        <p th:text="'Материал: ' + ${product.material}"></p>
+        <p th:text="'Страна изготовления: ' + ${product.manufacturerCountry}"></p>
+        <p th:text="'Категория: ' + ${product.category}"></p>
+        <p th:text="'Цена: ' + ${product.price} + ' руб.'"></p>
+        <p th:text="'Вес: ' + ${product.weight} + ' кг'"></p>
+        <p th:text="'Описание: ' + ${product.description}"></p>
+        <form action="/cart" method="post">
+            <input type="hidden" name="vendorCode" th:value="${product.vendorCode}">
+            <button type="submit" class="btn btn-primary btn-small"
+                    style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
+            </button>
+        </form>
+    </div>
+    <div th:if="${adminUser}" class="bg-light mt-2" style="margin: 10px; border-radius: 7px">
+        <form th:action="@{/product/update}" th:object="${product}" method="POST">
+            <h2 th:text="'Арктикул: ' + ${product.vendorCode}"></h2>
+            <input type="hidden" name="vendorCode" th:field="*{vendorCode}">
+            <p class="mb-0">Название:</p>
+            <input type="text" th:field="*{name}" class="form-control mb-0" placeholder="Название">
+            <p class="mb-0">Брэнд:</p>
+            <input type="text" th:field="*{brand}" class="form-control mb-0" placeholder="Брэнд">
+            <p class="mb-0">Материал:</p>
+            <input type="text" th:field="*{material}" class="form-control mb-0" placeholder="Материал">
+            <p class="mb-0">Страна изготовления:</p>
+            <input type="text" th:field="*{manufacturerCountry}" class="form-control mb-0"
+                   placeholder="Страна изготовления">
+            <p class="mb-0">Категория:</p>
+            <input type="text" th:field="*{category}" class="form-control mb-0" placeholder="Категория">
+            <p class="mb-0">Цена (в рублях):</p>
+            <input type="text" th:field="*{price}" class="form-control mb-0" placeholder="Цена">
+            <p class="mb-0">Вес (в килограммах):</p>
+            <input type="text" th:field="*{weight}" class="form-control mb-0" placeholder="Вес">
+            <p class="mb-0">Описание</p>
+            <input type="text" th:field="*{description}" class="form-control mb-2" placeholder="Описание">
+            <button type="submit" class="btn btn-primary btn-small"
+                    style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">Изменить описание продукта
+            </button>
+        </form>
+        <form th:action="@{/product/delete}" class="mt-1" method="POST">
+            <input type="hidden" name="vendorCode" th:value="${product.vendorCode}">
+            <button type="submit" class="btn btn-primary btn-small"
+                    style="border-color: #fc2020; background-color: #ff0000; color: #ffffff">Удалить
+            </button>
+        </form>
+        <form action="/cart" class="mt-1" method="post">
+            <input type="hidden" name="vendorCode" th:value="${product.vendorCode}">
+            <button type="submit" class="btn btn-primary btn-small"
+                    style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
+            </button>
+        </form>
+    </div>
 </div>
 
 <footer th:replace="/parts/footer :: footer"></footer>

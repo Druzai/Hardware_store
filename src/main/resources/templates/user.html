@@ -14,7 +14,8 @@
 <nav th:replace="/parts/navbar :: navbar"></nav>
 <div class="m-5">
     <p class="text-center">Добро пожаловать <span sec:authentication="name"></span></p>
-    <p class="text-center" th:text="'Все ваши роли: ' + ${userRole}"></p>
+    <p class="text-center" th:if="${userRole != ''}" th:text="'Все ваши роли: ' + ${userRole}"></p>
+    <p class="text-center" th:if="${userRole == ''}">У вас нет ролей :(</p>
     <p class="text-center">Список всех ролей:</p>
 
     <div style="align-content: center">

@@ -1,7 +1,7 @@
 package com.spring.controllers;
 
 import com.spring.models.Product;
-import com.spring.services.ProductSiteService;
+import com.spring.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,27 +13,27 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/products", produces = "application/json")
-public class ProductSiteController {
+public class ApiProductController {
     @Autowired
-    private ProductSiteService service;
+    private ProductService productService;
 
     @GetMapping
     public List<Product> getAllProducts() {
-        return service.getAllProducts();
+        return productService.getAllProducts();
     }
 
     @GetMapping("/find/{id}")
     public Product getBook(@PathVariable("id") int vendorId) {
-        return service.getProduct(vendorId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return productService.getProduct(vendorId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(path = "/add")
+    @GetMapping(path = "/add")
     public Product addProduct(@RequestParam String name, @RequestParam String description, @RequestParam String brand,
                            @RequestParam String material, @RequestParam String manufacturerCountry,
                            @RequestParam String category, @RequestParam int price, @RequestParam double weight) {
         if (!name.isEmpty() && !description.isEmpty() && !material.isEmpty() && !brand.isEmpty() &&
                 !manufacturerCountry.isEmpty() && !category.isEmpty() && price >= 0 && weight > 0)
-            return service.addProduct(new Product(name, description, brand, material, manufacturerCountry, category, price, weight));
+            return productService.addProduct(new Product(name, description, brand, material, manufacturerCountry, category, price, weight));
         else
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
@@ -45,7 +45,7 @@ public class ProductSiteController {
                               @RequestParam String category, @RequestParam int price, @RequestParam float weight) {
         if (!name.isEmpty() && !description.isEmpty() && !material.isEmpty() && !brand.isEmpty() &&
                 !manufacturerCountry.isEmpty() && !category.isEmpty() && price >= 0 && weight > 0 && vendorId > 0)
-            return service.updateProduct(vendorId,
+            return productService.updateProduct(vendorId,
                     new Product(name, description, brand, material, manufacturerCountry, category, price, weight));
         else
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -53,7 +53,7 @@ public class ProductSiteController {
 
     @DeleteMapping("/del/{id}")
     public String deleteProduct(@PathVariable("id") int vendorId) {
-        if (service.deleteProduct(vendorId))
+        if (productService.deleteProduct(vendorId))
             return "Deleted";
         else
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

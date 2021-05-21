@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class ProductSiteService {
+public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 

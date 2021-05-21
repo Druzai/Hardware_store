@@ -12,8 +12,14 @@
 <body>
 <nav th:replace="/parts/navbar :: navbar"></nav>
 
-<h1 class="text-center">Все товары</h1>
+<div th:if="${adminUser}">
+    <a class="btn btn-primary btn-small float-end"
+       style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff; margin-top: 5px; margin-right: 5px"
+       th:href="@{/product/add}">Добавить продукт</a>
+</div>
+
 <div class="container mb-5">
+    <h1 class="text-center">Все товары</h1>
     <h3 th:if="${products.size() == 0}" class="text-center" style="margin-top: 50px">Нету товаров!</h3>
     <div th:if="${products.size() != 0}" th:each="part : ${products}" class="row card-group d-flex mt-5">
         <div th:each="el : ${part}" class="mt-2 card bg-light" style="margin: 10px; border-radius: 7px">
@@ -22,12 +28,20 @@
             <p th:text="'Цена: ' + ${el.price} + ' руб.'"></p>
             <p th:text="'Вес: ' + ${el.weight} + ' кг'"></p>
             <p th:text="'Описание: ' + ${el.description}"></p>
-            <form action="/Cart" method="post">
-                <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
-                <button type="submit" class="btn btn-primary btn-small"
-                        style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
-                </button>
-            </form>
+            <div class="d-flex align-content-center">
+                <form action="/cart" method="post">
+                    <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
+                    <button type="submit" class="btn btn-primary btn-small"
+                            style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
+                    </button>
+                </form>
+                <form th:if="${adminUser}" th:action="@{/product/delete}" style="margin-left: 10px" method="POST">
+                    <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
+                    <button type="submit" class="btn btn-primary btn-small"
+                            style="border-color: #fc2020; background-color: #ff0000; color: #ffffff">Удалить
+                    </button>
+                </form>
+            </div>
             <a th:href="'/product/'+ ${el.vendorCode}">Подробнее</a>
         </div>
     </div>

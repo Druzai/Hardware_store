@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/search**"
 //                        "/**"
                 ).permitAll()
+                .antMatchers("/product/add", "/product/update", "/product/delete").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
