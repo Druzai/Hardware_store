@@ -36,7 +36,6 @@ public class HomeController {
             model.addAttribute("reason", "Не найден товар с арктикулом " + id);
             return "error";
         }
-
     }
 
     @GetMapping("/search")

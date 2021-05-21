@@ -1,32 +1,45 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="ru">
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Магазин стройматериалов</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-3 mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/">Домашняя страница</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/products">Все продукты</a>
-        </li>
-      </ul>
-      <form class="d-flex ms-auto" action="/search" method="get">
-<!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" th:value="@{search}">-->
-        <input class="form-control me-2" name = "search" type="search" placeholder="Поиск" aria-label="Search" id="search" th:value="${search}">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <ul class="navbar-nav justify-content-end mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Авторизация</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/registration">Регистрация</a>
-        </li>
-      </ul>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Магазин СтройТорг</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-3 mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Домашняя страница</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Все продукты</a>
+                </li>
+            </ul>
+            <form class="d-flex ms-auto" action="/search" method="get">
+                <input class="form-control me-2" name="search" type="search" placeholder="Поиск" aria-label="Search"
+                       id="search" th:value="${search}">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <ul sec:authorize="!isAuthenticated()" class="navbar-nav justify-content-end mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Авторизация</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/registration">Регистрация</a>
+                </li>
+            </ul>
+            <div sec:authorize="isAuthenticated()" class="navbar-nav justify-content-end mb-2 mb-lg-0">
+                <form id="logoutForm" method="POST" th:action="@{/logout}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user"><span sec:authentication="name"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="document.forms['logoutForm'].submit()">Выйти</a>
+                </li>
+            </div>
+        </div>
     </div>
-  </div>
 </nav>

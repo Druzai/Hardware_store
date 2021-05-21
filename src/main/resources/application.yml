@@ -4,11 +4,13 @@ spring:
     username: usr
     password: password1337
     driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: create
-    generate-ddl: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create
+#    generate-ddl: true
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+  messages:
+    basename: validation
 server:
   port: 80

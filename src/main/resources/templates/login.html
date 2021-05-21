@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login_req.css}">
+
+    <title>Вход в ваш аккаунт | СтройТорг</title>
+</head>
+
+<body>
+<nav th:replace="/parts/navbar :: navbar"></nav>
+<div class="container">
+    <form class="form-signin" method="POST" th:action="@{/login}">
+        <h2 class="form-heading">Авторизация</h2>
+
+        <div class="form-group">
+            <span th:text="${message}"></span>
+            <input name="username" type="text" class="form-control mb-1" placeholder="Имя пользователя"
+                   autofocus="true"/>
+
+            <input name="password" type="password" class="form-control mb-1" placeholder="Пароль"/>
+            <span class="has-error" th:text="${error}"></span>
+
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <span>Запомнить меня: </span>
+            <input type="checkbox" name="remember-me"/>
+            <br>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
+            <h4 class="text-center"><a href="/registration">Создать новый аккаунт</a></h4>
+        </div>
+    </form>
+</div>
+<footer th:replace="/parts/footer :: footer"></footer>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/setActiveNavLink.js/}"></script>
+</body>
+</html>

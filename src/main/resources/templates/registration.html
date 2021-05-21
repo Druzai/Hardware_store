@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login_req.css}">
+
+    <title>Создать аккаунт | СтройТорг</title>
+</head>
+
+<body>
+<nav th:replace="/parts/navbar :: navbar"></nav>
+
+<div class="container">
+    <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/registration}">
+        <h2 class="form-signin-heading">Создать аккаунт</h2>
+        <div class="form-group">
+            <input type="text" th:field="*{username}" class="form-control mb-1" placeholder="Имя пользователя"
+                   autofocus="true">
+            <span class="has-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="password" th:field="*{password}" class="form-control mb-1" placeholder="Пароль">
+            <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="password" th:field="*{passwordConfirm}" class="form-control mb-1"
+                   placeholder="Введите ваш пароль ещё раз">
+            <span class="has-error" th:if="${#fields.hasErrors('passwordConfirm')}"
+                  th:errors="*{passwordConfirm}"></span>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
+    </form>
+</div>
+
+<footer th:replace="/parts/footer :: footer"></footer>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/setActiveNavLink.js/}"></script>
+</body>
+</html>
