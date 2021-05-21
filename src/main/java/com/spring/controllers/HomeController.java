@@ -15,37 +15,36 @@ public class HomeController {
     private ProductSiteService productSiteService;
 
     @GetMapping("/")
-    public String getIndex(){
+    public String getIndex() {
         return "index";
     }
 
     @GetMapping("/products")
-    public String getAllProducts(Model model){
+    public String getAllProducts(Model model) {
         model.addAttribute("products", productSiteService.getAllSortedProducts());
         return "products";
     }
 
     @GetMapping("/product/{id}")
-    public String getProduct(@PathVariable int id, Model model){
+    public String getProduct(@PathVariable int id, Model model) {
         var product = productSiteService.getProduct(id);
         if (product.isPresent()) {
             model.addAttribute("product", product.get());
             return "currentproduct";
-        }
-        else {
+        } else {
             model.addAttribute("reason", "Не найден товар с арктикулом " + id);
             return "error";
         }
     }
 
     @GetMapping("/search")
-    public String searchProducts(@RequestParam String search, Model model){
+    public String searchProducts(@RequestParam String search, Model model) {
         model.addAttribute("products", productSiteService.searchProductsSorted(search));
         return "search";
     }
 
     @GetMapping("/error")
-    public String getError(){
+    public String getError() {
         return "error";
     }
 }

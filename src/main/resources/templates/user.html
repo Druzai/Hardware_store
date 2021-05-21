@@ -14,7 +14,26 @@
 <nav th:replace="/parts/navbar :: navbar"></nav>
 <div class="m-5">
     <p class="text-center">Добро пожаловать <span sec:authentication="name"></span></p>
-    <p class="text-center" th:text="'Ваша роль: ' + ${userRole}"></p>
+    <p class="text-center" th:text="'Все ваши роли: ' + ${userRole}"></p>
+    <p class="text-center">Список всех ролей:</p>
+
+    <div style="align-content: center">
+        <form th:action="@{/user}" th:object="${userForm}" method="POST">
+            <p>
+                <label>Роли:
+                    <input type="checkbox" name="roles"
+                           th:each="role : ${allRoles}"
+                           th:text="' ' + ${role.name} + ' '"
+                           th:value="${role.id}"
+                           th:field="*{roles}"
+                    />
+                </label>
+            </p>
+            <button type="submit" class="btn btn-primary btn-small"
+                    style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">Изменить роли
+            </button>
+        </form>
+    </div>
 </div>
 <footer th:replace="/parts/footer :: footer"></footer>
 <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>

@@ -35,6 +35,17 @@
                   th:errors="*{passwordConfirm}"></span>
         </div>
 
+        <p>
+            <label>Роли:
+                <input type="checkbox" name="roles" class="m-0"
+                       th:each="role : ${allRoles}"
+                       th:text="' ' + ${role.name} + ' '"
+                       th:value="${role.id}"
+                       th:field="*{roles}"
+                />
+            </label>
+        </p>
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
     </form>
 </div>

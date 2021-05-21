@@ -3,6 +3,7 @@ package com.spring.controllers;
 import com.spring.components.UserValidator;
 import com.spring.models.Role;
 import com.spring.models.User;
+import com.spring.services.RoleService;
 import com.spring.services.SecurityServiceImpl;
 import com.spring.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Autowired
     private SecurityServiceImpl securityService;
@@ -32,6 +36,7 @@ public class UserController {
             return "redirect:/";
         }
 
+        model.addAttribute("allRoles", roleService.getRoles());
         model.addAttribute("userForm", new User());
 
         return "registration";
@@ -68,7 +73,21 @@ public class UserController {
 
     @GetMapping("/user")
     public String getUser(Model model){
-//        model.addAttribute("userRole",)
+        var user = userService.getUser();
+        model.addAttribute("userRole", user.getRoles().stream().map(Role::getName).collect(Collectors.joining(", ")));
+        model.addAttribute("allRoles", roleService.getRoles());
+        model.addAttribute("userForm", user);
+        return "user";
+    }
+
+    @PostMapping("/user")
+    public String setUserRole(@ModelAttribute("userForm") User userForm, Model model){
+        var user = userService.getUser();
+        user.setRoles(userForm.getRoles());
+        userService.save(user);
+        model.addAttribute("userRole", user.getRoles().stream().map(Role::getName).collect(Collectors.joining(", ")));
+        model.addAttribute("allRoles", roleService.getRoles());
+        model.addAttribute("userForm", userForm);
         return "user";
     }
 }
