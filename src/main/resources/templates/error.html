@@ -6,26 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" th:href="@{/img/kekwfavicon.ico}">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
-    <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/error.css/}"/>
 
     <title>404 Не найдено | Hardware store</title>
 </head>
 <body>
-<!--    <nav th:replace="/parts/navbar :: navbar"></nav>-->
-<!--    <script type="text/javascript" th:src="@{/js/setActiveNavLink.js/}"></script>-->
+<!--<nav th:replace="/parts/navbar :: navbar"></nav>-->
 
 <div class="row">
     <div class="col-md-12 d-flex flex-column justify-content-center align-items-center text-white vh-100">
         <h1>404</h1>
-        <h4>Страница не найдена!</h4>
+        <h4 th:text="${reason}"></h4>
+        <h4 th:if="${reason == null}">Страница не найдена!</h4>
         <p>Упс! Страницы которую вы ищете не существует. Она могла быть перемещена или удалена.</p>
         <p>Вы ввели неправильный запрос или перешли на несуществующую страницу</p>
         <a class="link-back" href="/">Возвратиться домой</a>
     </div>
 </div>
 
-<!--    <footer th:replace="/parts/footer :: footer"></footer>-->
+<!--<footer th:replace="/parts/footer :: footer"></footer>-->
 <script type="text/javascript" th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>
+<!--<script type="text/javascript" th:src="@{/js/setActiveNavLink.js/}"></script>-->
 </body>
 </html>

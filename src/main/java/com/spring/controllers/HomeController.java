@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -31,9 +32,17 @@ public class HomeController {
             model.addAttribute("product", product.get());
             return "currentproduct";
         }
-        else
+        else {
+            model.addAttribute("reason", "Не найден товар с арктикулом " + id);
             return "error";
+        }
 
+    }
+
+    @GetMapping("/search")
+    public String searchProducts(@RequestParam String search, Model model){
+        model.addAttribute("products", productSiteService.searchProductsSorted(search));
+        return "search";
     }
 
     @GetMapping("/error")

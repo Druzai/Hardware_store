@@ -21,19 +21,11 @@ public class ProductSiteService {
     }
 
     public List<List<Product>> getAllSortedProducts(){
-        var oldList = productRepository.findAll();
-        int count = 0;
-        List<List<Product>> sorted_list = new ArrayList<>();
-        while (oldList.size() > count){
-            try{
-                sorted_list.add(oldList.subList(count, count + 3));
-            }
-            catch (IndexOutOfBoundsException ex){
-                sorted_list.add(oldList.subList(count, oldList.size()));
-            }
-            count += 3;
-        }
-        return sorted_list;
+        return this.sortProducts(productRepository.findAll());
+    }
+
+    public List<List<Product>> searchProductsSorted(String searchQuery){
+        return this.sortProducts(productRepository.search(searchQuery.toLowerCase()));
     }
 
     public Optional<Product> getProduct(int vendorId) {
@@ -73,5 +65,20 @@ public class ProductSiteService {
             log.info("Didn't delete nonexistent order");
             return false;
         }
+    }
+
+    private List<List<Product>> sortProducts(List<Product> oldList){
+        int count = 0;
+        List<List<Product>> sorted_list = new ArrayList<>();
+        while (oldList.size() > count){
+            try{
+                sorted_list.add(oldList.subList(count, count + 3));
+            }
+            catch (IndexOutOfBoundsException ex){
+                sorted_list.add(oldList.subList(count, oldList.size()));
+            }
+            count += 3;
+        }
+        return sorted_list;
     }
 }
