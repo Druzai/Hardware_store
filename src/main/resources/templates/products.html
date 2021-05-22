@@ -21,7 +21,7 @@
 <div class="container mb-5">
     <h1 class="text-center">Все товары</h1>
     <h3 th:if="${products.size() == 0}" class="text-center" style="margin-top: 50px">Нету товаров!</h3>
-    <div th:if="${products.size() != 0}" th:each="part : ${products}" class="row card-group d-flex mt-5">
+    <div th:if="${products.size() != 0}" th:each="part : ${products}" class="row card-group d-flex mt-2">
         <div th:each="el : ${part}" class="mt-2 card bg-light" style="margin: 10px; border-radius: 7px">
             <h2 th:text="'Арктикул: ' + ${el.vendorCode}"></h2>
             <h3 th:text="'Название: ' + ${el.name}"></h3>
@@ -29,12 +29,13 @@
             <p th:text="'Вес: ' + ${el.weight} + ' кг'"></p>
             <p th:text="'Описание: ' + ${el.description}"></p>
             <div class="d-flex align-content-center">
-                <form action="/cart" method="post">
+                <form th:if="${!#lists.contains(listOfExProductCodes, el.vendorCode)}" th:action="@{/cart/add}" method="post">
                     <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
                     <button type="submit" class="btn btn-primary btn-small"
                             style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
                     </button>
                 </form>
+                <button th:if="${#lists.contains(listOfExProductCodes, el.vendorCode)}" class="btn btn-warning btn-small">Уже в корзине</button>
                 <form th:if="${adminUser}" th:action="@{/product/delete}" style="margin-left: 10px" method="POST">
                     <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
                     <button type="submit" class="btn btn-primary btn-small"

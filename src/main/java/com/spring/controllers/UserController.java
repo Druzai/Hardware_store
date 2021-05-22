@@ -43,10 +43,11 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("allRoles", roleService.getRoles());
             return "registration";
         }
         userService.save(userForm);
@@ -72,7 +73,7 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public String getUser(Model model){
+    public String getUser(Model model) {
         var user = userService.getUser();
         model.addAttribute("userRole", user.getRoles().stream().map(Role::getName).collect(Collectors.joining(", ")));
         model.addAttribute("allRoles", roleService.getRoles());
@@ -81,7 +82,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public String setUserRole(@ModelAttribute("userForm") User userForm, Model model){
+    public String setUserRole(@ModelAttribute("userForm") User userForm, Model model) {
         var user = userService.getUser();
         user.setRoles(userForm.getRoles());
         userService.save(user);

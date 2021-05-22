@@ -37,10 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/registration",
                         "/",
                         "/products",
+                        "/product/{vendorCode:\\d+}",
                         "/search**"
 //                        "/**"
                 ).permitAll()
-                .antMatchers("/product/add", "/product/update", "/product/delete").authenticated()
+                .antMatchers("/product/add", "/product/update", "/product/delete", "/cart**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
                 .and()
                 .logout()
-                .deleteCookies("JSESSIONID")
+//                .deleteCookies("JSESSIONID")
                 .deleteCookies("remember-me")
                 .permitAll();
     }

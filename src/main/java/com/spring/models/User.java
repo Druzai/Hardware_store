@@ -22,4 +22,7 @@ public class User {
 
     @ManyToMany
     private Set<Role> roles;
+
+    @ManyToMany
+    private Set<Product> products;
 }

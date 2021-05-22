@@ -25,12 +25,13 @@
         <p th:text="'Цена: ' + ${product.price} + ' руб.'"></p>
         <p th:text="'Вес: ' + ${product.weight} + ' кг'"></p>
         <p th:text="'Описание: ' + ${product.description}"></p>
-        <form action="/cart" method="post">
+        <form th:if="${!inCart}" th:action="@{/cart/add}" method="post">
             <input type="hidden" name="vendorCode" th:value="${product.vendorCode}">
             <button type="submit" class="btn btn-primary btn-small"
                     style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
             </button>
         </form>
+        <button th:if="${inCart}" class="btn btn-warning btn-small">Уже в корзине</button>
     </div>
     <div th:if="${adminUser}" class="bg-light mt-2" style="margin: 10px; border-radius: 7px">
         <form th:action="@{/product/update}" th:object="${product}" method="POST">
@@ -63,12 +64,13 @@
                     style="border-color: #fc2020; background-color: #ff0000; color: #ffffff">Удалить
             </button>
         </form>
-        <form action="/cart" class="mt-1" method="post">
+        <form th:if="${!inCart}" th:action="@{/cart/add}" class="mt-1" method="post">
             <input type="hidden" name="vendorCode" th:value="${product.vendorCode}">
             <button type="submit" class="btn btn-primary btn-small"
                     style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
             </button>
         </form>
+        <button th:if="${inCart}" class="btn btn-warning btn-small">Уже в корзине</button>
     </div>
 </div>
 

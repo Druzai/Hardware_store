@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
+
+    <title>Корзина | СтройТорг</title>
+</head>
+<body>
+<nav th:replace="/parts/navbar :: navbar"></nav>
+
+<div class="container mb-5">
+    <h1 class="text-center">Товары в корзине</h1>
+    <h3 th:if="${products.size() == 0}" class="text-center" style="margin-top: 50px">Вы не выбрали ни один товар!</h3>
+    <div th:if="${products.size() != 0}">
+        <details>
+            <summary>Список продуктов:</summary>
+            <div th:each="part : ${products}" class="row card-group d-flex mt-2">
+                <div th:each="el : ${part}" class="mt-2 card bg-light" style="margin: 10px; border-radius: 7px">
+                    <h2 th:text="'Арктикул: ' + ${el.vendorCode}"></h2>
+                    <h3 th:text="'Название: ' + ${el.name}"></h3>
+                    <p th:text="'Цена: ' + ${el.price} + ' руб.'"></p>
+                    <p th:text="'Вес: ' + ${el.weight} + ' кг'"></p>
+                    <p th:text="'Описание: ' + ${el.description}"></p>
+                    <div class="d-flex align-content-center">
+                        <form th:action="@{/cart/delete}" method="POST">
+                            <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
+                            <button type="submit" class="btn btn-primary btn-small"
+                                    style="border-color: #fc2020; background-color: #ff0000; color: #ffffff">Удалить из
+                                корзины
+                            </button>
+                        </form>
+                    </div>
+                    <a th:href="'/product/'+ ${el.vendorCode}">Подробнее</a>
+                </div>
+            </div>
+        </details>
+        <span th:text="'Сумма: ' + ${productsSumm} + ' руб.'"></span>
+        <div class="d-flex align-content-center mt-1">
+            <form th:action="@{/cart/thanksforbuying}" method="POST">
+                <button type="submit" class="btn btn-primary btn-small"
+                        style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">Сделать заказ
+                </button>
+            </form>
+            <form th:action="@{/cart/deleteall}" style="margin-left: 10px" method="POST">
+                <button type="submit" class="btn btn-primary btn-small"
+                        style="border-color: #fc2020; background-color: #ff0000; color: #ffffff">Очистить корзину
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/parts/footer :: footer"></footer>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/setActiveNavLink.js/}"></script>
+</body>
+</html>

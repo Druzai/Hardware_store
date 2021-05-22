@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -21,11 +23,11 @@ public class ProductService {
     }
 
     public List<List<Product>> getAllSortedProducts(){
-        return this.sortProducts(productRepository.findAll());
+        return sortProducts(productRepository.findAll());
     }
 
     public List<List<Product>> searchProductsSorted(String searchQuery){
-        return this.sortProducts(productRepository.search(searchQuery.toLowerCase()));
+        return sortProducts(productRepository.search(searchQuery.toLowerCase()));
     }
 
     public Optional<Product> getProduct(int vendorId) {
@@ -67,7 +69,7 @@ public class ProductService {
         }
     }
 
-    private List<List<Product>> sortProducts(List<Product> oldList){
+    public List<List<Product>> sortProducts(List<Product> oldList){
         int count = 0;
         List<List<Product>> sorted_list = new ArrayList<>();
         while (oldList.size() > count){
@@ -80,5 +82,9 @@ public class ProductService {
             count += 3;
         }
         return sorted_list;
+    }
+
+    public List<List<Product>> sortProducts(Set<Product> oldSet){
+        return sortProducts(new ArrayList<>(oldSet));
     }
 }

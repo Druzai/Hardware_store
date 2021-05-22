@@ -12,11 +12,12 @@
 </head>
 <body>
 <nav th:replace="/parts/navbar :: navbar"></nav>
-<div class="m-5">
-    <p class="text-center">Добро пожаловать <span sec:authentication="name"></span></p>
-    <p class="text-center" th:if="${userRole != ''}" th:text="'Все ваши роли: ' + ${userRole}"></p>
-    <p class="text-center" th:if="${userRole == ''}">У вас нет ролей :(</p>
-    <p class="text-center">Список всех ролей:</p>
+
+<div class="m-5 text-center">
+    <p>Добро пожаловать <span sec:authentication="name"></span></p>
+    <p th:if="${userRole != ''}" th:text="'Все ваши роли: ' + ${userRole}"></p>
+    <p th:if="${userRole == ''}">У вас нет ролей :(</p>
+    <p>Список всех ролей:</p>
 
     <div style="align-content: center">
         <form th:action="@{/user}" th:object="${userForm}" method="POST">
@@ -36,6 +37,7 @@
         </form>
     </div>
 </div>
+
 <footer th:replace="/parts/footer :: footer"></footer>
 <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>
 <script type="text/javascript" th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>

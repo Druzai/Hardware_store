@@ -25,7 +25,7 @@ public class SecurityServiceImpl {
     public boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || AnonymousAuthenticationToken.class.
-            isAssignableFrom(authentication.getClass())) {
+                isAssignableFrom(authentication.getClass())) {
             return false;
         }
         return authentication.isAuthenticated();
@@ -39,7 +39,7 @@ public class SecurityServiceImpl {
 
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            logger.debug(String.format("Автоматический вход прошёл удачно, %s!", username));
+            logger.debug(String.format("Autologin successful, %s!", username));
         }
     }
 }

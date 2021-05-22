@@ -19,7 +19,7 @@
             <form class="d-flex ms-auto" action="/search" method="get">
                 <input class="form-control me-2" name="search" type="search" placeholder="Поиск" aria-label="Search"
                        id="search" th:value="${search}">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-outline-success" type="submit">Поиск</button>
             </form>
             <ul sec:authorize="!isAuthenticated()" class="navbar-nav justify-content-end mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -33,6 +33,9 @@
                 <form id="logoutForm" method="POST" th:action="@{/logout}">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">В корзину</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/user"><span sec:authentication="name"></span></a>
                 </li>

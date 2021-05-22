@@ -3,6 +3,7 @@ package com.spring.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Setter
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vendorCode;
 //    @Lob
 //    private byte[] imageBytes;
@@ -22,6 +23,9 @@ public class Product {
     private String category;
     private int price;
     private double weight;
+
+    @ManyToMany(mappedBy = "products")
+    private Set<User> users;
 
     public Product() {
     }
