@@ -4,8 +4,8 @@ import com.spring.components.UserValidator;
 import com.spring.models.Role;
 import com.spring.models.User;
 import com.spring.services.RoleService;
-import com.spring.services.SecurityServiceImpl;
-import com.spring.services.UserServiceImpl;
+import com.spring.services.SecurityService;
+import com.spring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 @Controller
 public class UserController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
     private RoleService roleService;
 
     @Autowired
-    private SecurityServiceImpl securityService;
+    private SecurityService securityService;
 
     @Autowired
     private UserValidator userValidator;

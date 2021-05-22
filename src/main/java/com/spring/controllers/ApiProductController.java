@@ -29,8 +29,8 @@ public class ApiProductController {
 
     @GetMapping(path = "/add")
     public Product addProduct(@RequestParam String name, @RequestParam String description, @RequestParam String brand,
-                           @RequestParam String material, @RequestParam String manufacturerCountry,
-                           @RequestParam String category, @RequestParam int price, @RequestParam double weight) {
+                              @RequestParam String material, @RequestParam String manufacturerCountry,
+                              @RequestParam String category, @RequestParam int price, @RequestParam double weight) {
         if (!name.isEmpty() && !description.isEmpty() && !material.isEmpty() && !brand.isEmpty() &&
                 !manufacturerCountry.isEmpty() && !category.isEmpty() && price >= 0 && weight > 0)
             return productService.addProduct(new Product(name, description, brand, material, manufacturerCountry, category, price, weight));
@@ -40,9 +40,9 @@ public class ApiProductController {
 
     @PostMapping(path = "/update/{id}")
     public Product updateProduct(@PathVariable("id") int vendorId, @RequestParam String name,
-                              @RequestParam String description, @RequestParam String brand,
-                              @RequestParam String material, @RequestParam String manufacturerCountry,
-                              @RequestParam String category, @RequestParam int price, @RequestParam float weight) {
+                                 @RequestParam String description, @RequestParam String brand,
+                                 @RequestParam String material, @RequestParam String manufacturerCountry,
+                                 @RequestParam String category, @RequestParam int price, @RequestParam float weight) {
         if (!name.isEmpty() && !description.isEmpty() && !material.isEmpty() && !brand.isEmpty() &&
                 !manufacturerCountry.isEmpty() && !category.isEmpty() && price >= 0 && weight > 0 && vendorId > 0)
             return productService.updateProduct(vendorId,

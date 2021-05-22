@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="icon" th:href="@{/img/favicon.ico}">
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
 
-  <title>Добавление товара | СтройТорг</title>
+    <title>Добавление товара | СтройТорг</title>
 </head>
 <body>
 <nav th:replace="/parts/navbar :: navbar"></nav>
 <div class="m-5">
-  <form th:action="@{/product/add}" th:object="${product}" method="POST">
-    <p class="mb-0">Название:</p>
-    <input type="text" th:field="*{name}" class="form-control mb-0" placeholder="Название">
-    <p class="mb-0">Брэнд:</p>
-    <input type="text" th:field="*{brand}" class="form-control mb-0" placeholder="Брэнд">
-    <p class="mb-0">Материал:</p>
-    <input type="text" th:field="*{material}" class="form-control mb-0" placeholder="Материал">
-    <p class="mb-0">Страна изготовления:</p>
-    <input type="text" th:field="*{manufacturerCountry}" class="form-control mb-0"
-           placeholder="Страна изготовления">
-    <p class="mb-0">Категория:</p>
-    <input type="text" th:field="*{category}" class="form-control mb-0" placeholder="Категория">
-    <p class="mb-0">Цена (в рублях):</p>
-    <input type="text" th:field="*{price}" class="form-control mb-0" placeholder="Цена">
-    <p class="mb-0">Вес (в килограммах):</p>
-    <input type="text" th:field="*{weight}" class="form-control mb-0" placeholder="Вес">
-    <p class="mb-0">Описание</p>
-    <input type="text" th:field="*{description}" class="form-control mb-2" placeholder="Описание">
-    <button type="submit" class="btn btn-primary btn-small"
-            style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">Добавить товар
-    </button>
-  </form>
+    <form th:action="@{/product/add}" th:object="${product}" method="POST">
+        <p class="mb-0">Название:</p>
+        <input type="text" th:field="*{name}" class="form-control mb-0" placeholder="Название">
+        <p class="mb-0">Брэнд:</p>
+        <input type="text" th:field="*{brand}" class="form-control mb-0" placeholder="Брэнд">
+        <p class="mb-0">Материал:</p>
+        <input type="text" th:field="*{material}" class="form-control mb-0" placeholder="Материал">
+        <p class="mb-0">Страна изготовления:</p>
+        <input type="text" th:field="*{manufacturerCountry}" class="form-control mb-0"
+               placeholder="Страна изготовления">
+        <p class="mb-0">Категория:</p>
+        <input type="text" th:field="*{category}" class="form-control mb-0" placeholder="Категория">
+        <p class="mb-0">Цена (в рублях):</p>
+        <input type="text" th:field="*{price}" class="form-control mb-0" placeholder="Цена">
+        <p class="mb-0">Вес (в килограммах):</p>
+        <input type="text" th:field="*{weight}" class="form-control mb-0" placeholder="Вес">
+        <p class="mb-0">Описание</p>
+        <input type="text" th:field="*{description}" class="form-control mb-2" placeholder="Описание">
+        <button type="submit" class="btn btn-primary btn-small"
+                style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">Добавить товар
+        </button>
+    </form>
 </div>
 <footer th:replace="/parts/footer :: footer"></footer>
 <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>

@@ -2,8 +2,8 @@ package com.spring.controllers;
 
 import com.spring.models.Product;
 import com.spring.services.ProductService;
-import com.spring.services.SecurityServiceImpl;
-import com.spring.services.UserServiceImpl;
+import com.spring.services.SecurityService;
+import com.spring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +18,10 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    private SecurityServiceImpl securityService;
+    private SecurityService securityService;
 
     @GetMapping("/products")
     public String getAllProducts(Model model) {

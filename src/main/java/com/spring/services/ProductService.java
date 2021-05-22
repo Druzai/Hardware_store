@@ -22,11 +22,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public List<List<Product>> getAllSortedProducts(){
+    public List<List<Product>> getAllSortedProducts() {
         return sortProducts(productRepository.findAll());
     }
 
-    public List<List<Product>> searchProductsSorted(String searchQuery){
+    public List<List<Product>> searchProductsSorted(String searchQuery) {
         return sortProducts(productRepository.search(searchQuery.toLowerCase()));
     }
 
@@ -69,14 +69,13 @@ public class ProductService {
         }
     }
 
-    public List<List<Product>> sortProducts(List<Product> oldList){
+    public List<List<Product>> sortProducts(List<Product> oldList) {
         int count = 0;
         List<List<Product>> sorted_list = new ArrayList<>();
-        while (oldList.size() > count){
-            try{
+        while (oldList.size() > count) {
+            try {
                 sorted_list.add(oldList.subList(count, count + 3));
-            }
-            catch (IndexOutOfBoundsException ex){
+            } catch (IndexOutOfBoundsException ex) {
                 sorted_list.add(oldList.subList(count, oldList.size()));
             }
             count += 3;
@@ -84,7 +83,7 @@ public class ProductService {
         return sorted_list;
     }
 
-    public List<List<Product>> sortProducts(Set<Product> oldSet){
+    public List<List<Product>> sortProducts(Set<Product> oldSet) {
         return sortProducts(new ArrayList<>(oldSet));
     }
 }

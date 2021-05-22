@@ -1,7 +1,7 @@
 package com.spring.components;
 
 import com.spring.models.User;
-import com.spring.services.UserServiceImpl;
+import com.spring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 @Component
 public class UserValidator implements Validator {
     @Autowired
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -26,7 +26,7 @@ public class UserValidator implements Validator {
         if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
             errors.rejectValue("username", "Size.userForm.username");
         }
-        if (userServiceImpl.findByUsername(user.getUsername()) != null) {
+        if (userService.findByUsername(user.getUsername()) != null) {
             errors.rejectValue("username", "Duplicate.userForm.username");
         }
 

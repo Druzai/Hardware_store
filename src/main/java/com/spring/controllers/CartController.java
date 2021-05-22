@@ -2,7 +2,7 @@ package com.spring.controllers;
 
 import com.spring.models.Product;
 import com.spring.services.ProductService;
-import com.spring.services.UserServiceImpl;
+import com.spring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/cart")
 public class CartController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
     private ProductService productService;

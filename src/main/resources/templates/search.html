@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="icon" th:href="@{/img/favicon.ico}">
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"/>
 
-  <title>Результаты поиска | СтройТорг</title>
+    <title>Результаты поиска | СтройТорг</title>
 </head>
 <body>
 <nav th:replace="/parts/navbar :: navbar"></nav>
 
 <h1 class="text-center">Результаты поиска</h1>
 <div class="container mb-5">
-  <h3 th:if="${products.size() == 0}" class="text-center" style="margin-top: 50px">Поиск не дал результатов!</h3>
-  <div th:if="${products.size() != 0}" th:each="part : ${products}" class="row card-group d-flex mt-5">
-    <div th:each="el : ${part}" class="mt-2 card bg-light" style="margin: 10px; border-radius: 7px">
-      <h2 th:text="'Арктикул: ' + ${el.vendorCode}"></h2>
-      <h3 th:text="'Название: ' + ${el.name}"></h3>
-      <p th:text="'Цена: ' + ${el.price} + ' руб.'"></p>
-      <p th:text="'Вес: ' + ${el.weight} + ' кг'"></p>
-      <p th:text="'Описание: ' + ${el.description}"></p>
-      <form action="/Cart" method="post">
-        <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
-        <button type="submit" class="btn btn-primary btn-small"
-                style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
-        </button>
-      </form>
-      <a th:href="'/product/'+ ${el.vendorCode}">Подробнее</a>
+    <h3 th:if="${products.size() == 0}" class="text-center" style="margin-top: 50px">Поиск не дал результатов!</h3>
+    <div th:if="${products.size() != 0}" th:each="part : ${products}" class="row card-group d-flex mt-5">
+        <div th:each="el : ${part}" class="mt-2 card bg-light" style="margin: 10px; border-radius: 7px">
+            <h2 th:text="'Арктикул: ' + ${el.vendorCode}"></h2>
+            <h3 th:text="'Название: ' + ${el.name}"></h3>
+            <p th:text="'Цена: ' + ${el.price} + ' руб.'"></p>
+            <p th:text="'Вес: ' + ${el.weight} + ' кг'"></p>
+            <p th:text="'Описание: ' + ${el.description}"></p>
+            <form action="/Cart" method="post">
+                <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
+                <button type="submit" class="btn btn-primary btn-small"
+                        style="border-color: #20fc72; background-color: #00ff5e; color: #ffffff">В корзину
+                </button>
+            </form>
+            <a th:href="'/product/'+ ${el.vendorCode}">Подробнее</a>
+        </div>
     </div>
-  </div>
 </div>
 
 <footer th:replace="/parts/footer :: footer"></footer>
