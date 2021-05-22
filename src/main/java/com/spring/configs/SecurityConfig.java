@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/",
                         "/products",
                         "/product/{vendorCode:\\d+}",
+                        "/product/imageDisplay**",
                         "/search**"
 //                        "/**"
                 ).permitAll()

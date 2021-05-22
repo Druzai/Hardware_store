@@ -16,7 +16,12 @@
     <h1 align="center" style="alignment: center" th:text="'Сведения по товару ' + ${product.name}"></h1>
 
     <div th:if="${!adminUser}" class="bg-light mt-2" style="margin: 10px; border-radius: 7px">
-        <h2 th:text="'Арктикул: ' + ${product.vendorCode}"></h2>
+        <div class="text-center">
+            <img th:if="${imgExists}" th:src="@{'/product/imageDisplay?id=' + ${product.vendorCode}}"
+                 class="w-25 р-25 m-1 rounded-3" alt="Фото товара"/>
+            <img th:if="${!imgExists}" th:src="@{/img/image-placeholder.png}" class="w-25 р-25 m-1" alt="Фото товара нету"/>
+        </div>
+        <h2 th:text="'Артикул: ' + ${product.vendorCode}"></h2>
         <h3 th:text="'Название: ' + ${product.name}"></h3>
         <p th:text="'Брэнд: ' + ${product.brand}"></p>
         <p th:text="'Материал: ' + ${product.material}"></p>
@@ -34,11 +39,25 @@
         <button th:if="${inCart}" class="btn btn-warning btn-small">Уже в корзине</button>
     </div>
     <div th:if="${adminUser}" class="bg-light mt-2" style="margin: 10px; border-radius: 7px">
-        <form th:action="@{/product/update}" th:object="${product}" method="POST">
-            <h2 th:text="'Арктикул: ' + ${product.vendorCode}"></h2>
+        <form th:action="@{/product/update}" th:object="${product}" method="POST" enctype="multipart/form-data">
+            <div class="text-center">
+                <img th:if="${imgExists}" th:src="@{'/product/imageDisplay?id=' + ${product.vendorCode}}"
+                     class="w-25 р-25 m-1 rounded-3" alt="Фото товара"/>
+                <img th:if="${!imgExists}" th:src="@{/img/image-placeholder.png}" class="w-25 р-25 m-1"
+                     alt="Фото товара нету"/>
+            </div>
+            <h2 th:text="'Артикул: ' + ${product.vendorCode}"></h2>
             <input type="hidden" name="vendorCode" th:field="*{vendorCode}">
             <p class="mb-0">Название:</p>
             <input type="text" th:field="*{name}" class="form-control mb-0" placeholder="Название">
+            <p class="mb-0">Фото:</p>
+            <input type="file" th:field="${img.multipartFile}" class="form-control mb-0" placeholder="Фото"
+                   multiple="multiple" name="multipartFilesDocument" value="multipartFilesDocument">
+            <p th:if="${imgExists}" class="mb-0">
+                <label>Удалить изображение?
+                    <input type="checkbox" id="needToDelete" name="needToDelete" th:checked="${!needToDelete}"/>
+                </label>
+            </p>
             <p class="mb-0">Брэнд:</p>
             <input type="text" th:field="*{brand}" class="form-control mb-0" placeholder="Брэнд">
             <p class="mb-0">Материал:</p>

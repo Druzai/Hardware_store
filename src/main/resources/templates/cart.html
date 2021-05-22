@@ -20,21 +20,30 @@
             <summary>Список продуктов:</summary>
             <div th:each="part : ${products}" class="row card-group d-flex mt-2">
                 <div th:each="el : ${part}" class="mt-2 card bg-light" style="margin: 10px; border-radius: 7px">
-                    <h2 th:text="'Арктикул: ' + ${el.vendorCode}"></h2>
-                    <h3 th:text="'Название: ' + ${el.name}"></h3>
-                    <p th:text="'Цена: ' + ${el.price} + ' руб.'"></p>
-                    <p th:text="'Вес: ' + ${el.weight} + ' кг'"></p>
-                    <p th:text="'Описание: ' + ${el.description}"></p>
-                    <div class="d-flex align-content-center">
-                        <form th:action="@{/cart/delete}" method="POST">
-                            <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
-                            <button type="submit" class="btn btn-primary btn-small"
-                                    style="border-color: #fc2020; background-color: #ff0000; color: #ffffff">Удалить из
-                                корзины
-                            </button>
-                        </form>
+                    <div class="text-center">
+                        <img th:if="${el.imageBytes != null}" th:src="@{'/product/imageDisplay?id=' + ${el.vendorCode}}"
+                             class="w-25 р-25 m-1 rounded-3" alt="Фото товара"/>
+                        <img th:if="${el.imageBytes == null}" th:src="@{/img/image-placeholder.png}" class="w-25 р-25 m-1"
+                             alt="Фото товара нету"/>
                     </div>
-                    <a th:href="'/product/'+ ${el.vendorCode}">Подробнее</a>
+                    <div class="mt-auto" style="bottom: 0">
+                        <h2 th:text="'Артикул: ' + ${el.vendorCode}"></h2>
+                        <h3 th:text="'Название: ' + ${el.name}"></h3>
+                        <p th:text="'Цена: ' + ${el.price} + ' руб.'"></p>
+                        <p th:text="'Вес: ' + ${el.weight} + ' кг'"></p>
+                        <p th:text="'Описание: ' + ${el.description}"></p>
+                        <div class="d-flex align-content-center">
+                            <form th:action="@{/cart/delete}" method="POST">
+                                <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
+                                <button type="submit" class="btn btn-primary btn-small"
+                                        style="border-color: #fc2020; background-color: #ff0000; color: #ffffff">Удалить
+                                    из
+                                    корзины
+                                </button>
+                            </form>
+                        </div>
+                        <a th:href="'/product/'+ ${el.vendorCode}">Подробнее</a>
+                    </div>
                 </div>
             </div>
         </details>

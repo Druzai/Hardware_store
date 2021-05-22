@@ -13,8 +13,8 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vendorCode;
-    //    @Lob
-//    private byte[] imageBytes;
+    @Lob
+    private byte[] imageBytes;
     private String name;
     private String description;
     private String brand;
