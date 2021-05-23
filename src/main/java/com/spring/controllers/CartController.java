@@ -14,15 +14,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+/**
+ * Контроллер для добавления/изменения/удаления продуктов в корзину пользователя.
+ */
 @Controller
 @RequestMapping(path = "/cart")
 public class CartController {
+    /**
+     * Служба для работы с пользователями.
+     */
     @Autowired
     private UserService userService;
 
+    /**
+     * Служба для работы с продуктами.
+     */
     @Autowired
     private ProductService productService;
 
+    /**
+     * Получение страницы с корзиной с продуктами пользователя.
+     * @param model модель страницы
+     * @return страница "cart"
+     */
     @GetMapping()
     public String getCart(Model model) {
         var usersProducts = userService.getUser().getProducts();
@@ -33,6 +47,11 @@ public class CartController {
         return "cart";
     }
 
+    /**
+     * Добавление продукта в корзину пользователя.
+     * @param vendorCode артикул продукта
+     * @return перенаправление на адрес "/cart"
+     */
     @PostMapping("/add")
     public String addProductToCart(@RequestParam int vendorCode) {
         var user = userService.getUser();
@@ -43,6 +62,11 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    /**
+     * Удаление продукта из корзины пользователя.
+     * @param vendorCode артикул продукта
+     * @return перенаправление на адрес "/cart"
+     */
     @PostMapping("/delete")
     public String deleteProductFromCart(@RequestParam int vendorCode) {
         var user = userService.getUser();
@@ -53,6 +77,10 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    /**
+     * Удаление всех продуктов из корзины пользователя.
+     * @return перенаправление на адрес "/cart"
+     */
     @PostMapping("/deleteall")
     public String deleteAllProductsFromCart() {
         var user = userService.getUser();
@@ -61,6 +89,11 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    /**
+     * Обработка заказа выбранных товаров и выдача страницы.
+     * @param model модель страницы
+     * @return страница "thanksforbuying"
+     */
     @PostMapping("/thanksforbuying")
     public String buyProducts(Model model) {
         var user = userService.getUser();

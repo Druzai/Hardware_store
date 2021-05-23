@@ -8,16 +8,32 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+/**
+ * Класс для проверки логина и пароля, которые были введены пользователем.
+ */
 @Component
 public class UserValidator implements Validator {
+    /**
+     * Служба для работы пользователями.
+     */
     @Autowired
     private UserService userService;
 
+    /**
+     * Проверка класса на то, что он является классом "User".
+     * @param aClass проверяемый класс
+     * @return проверяемый класс является классом "User" или нет
+     */
     @Override
     public boolean supports(Class<?> aClass) {
         return User.class.equals(aClass);
     }
 
+    /**
+     * Проверка логина и пароля пользователя на соответствие.
+     * @param o объект пользователя
+     * @param errors объект хранения ошибок, если логин или пароль пользователя не прошли проверку
+     */
     @Override
     public void validate(Object o, Errors errors) {
         User user = (User) o;

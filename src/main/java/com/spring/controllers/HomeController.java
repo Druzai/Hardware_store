@@ -5,14 +5,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
+/**
+ * Контроллер для работы с главной страницей и страницей ошибки 404
+ */
 @Controller
 public class HomeController {
+    /**
+     * Служба для работы с продуктами
+     */
     @Autowired
     private ProductService productService;
 
+    /**
+     * Получение главной страницы
+     * @param model модель страницы
+     * @return страница "index"
+     */
     @GetMapping("/")
     public String getIndex(Model model) {
         var products = productService.getAllProducts();
@@ -25,12 +35,10 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/search")
-    public String searchProducts(@RequestParam String search, Model model) {
-        model.addAttribute("products", productService.searchProductsSorted(search));
-        return "search";
-    }
-
+    /**
+     * Возвращение страницы с ошибкой 404
+     * @return страница "error"
+     */
     @GetMapping("/error")
     public String getError() {
         return "error";

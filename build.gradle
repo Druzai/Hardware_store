@@ -16,6 +16,10 @@ configurations {
 
 compileJava.options.compilerArgs << "-parameters"
 
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
 repositories {
     mavenCentral()
     maven { url 'https://repo.spring.io/milestone' }

@@ -15,11 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Служба о дополнительный сведениях о пользователе.
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+    /**
+     * Репозиторий для взаимодействия с таблицей "users".
+     */
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Получение пользователя для Spring Security.
+     * @param username логин пользователя
+     * @return класс пользователя
+     */
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
