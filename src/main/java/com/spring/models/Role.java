@@ -33,7 +33,8 @@ public class Role {
 
     /**
      * Инициализация роли со всеми полями.
-     * @param id id роли
+     *
+     * @param id        id роли
      * @param role_user имя роли
      */
     public Role(long id, String role_user) {

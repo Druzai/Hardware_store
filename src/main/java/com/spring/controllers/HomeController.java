@@ -20,6 +20,7 @@ public class HomeController {
 
     /**
      * Получение главной страницы
+     *
      * @param model модель страницы
      * @return страница "index"
      */
@@ -27,9 +28,12 @@ public class HomeController {
     public String getIndex(Model model) {
         var products = productService.getAllProducts();
         products = products.subList(0, Math.min(products.size(), 10));
-        if (products.size() > 1) {
+        if (products.size() > 0) {
             model.addAttribute("firstProduct", products.get(0));
-            model.addAttribute("products", products.subList(1, products.size()));
+            if (products.size() > 1)
+                model.addAttribute("products", products.subList(1, products.size()));
+            else
+                model.addAttribute("products", null);
         } else
             model.addAttribute("firstProduct", null);
         return "index";
@@ -37,6 +41,7 @@ public class HomeController {
 
     /**
      * Возвращение страницы с ошибкой 404
+     *
      * @return страница "error"
      */
     @GetMapping("/error")

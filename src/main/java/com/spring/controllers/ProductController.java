@@ -42,6 +42,7 @@ public class ProductController {
 
     /**
      * Получение страницы всех продуктов.
+     *
      * @param model модель страницы
      * @return страница "products"
      */
@@ -54,8 +55,9 @@ public class ProductController {
 
     /**
      * Поиск продуктов удовлетворяющих запросу.
+     *
      * @param search строка запроса
-     * @param model модель страницы
+     * @param model  модель страницы
      * @return страница "search"
      */
     @GetMapping("/search")
@@ -67,7 +69,8 @@ public class ProductController {
 
     /**
      * Получение страницы продукта с нужным артикулом.
-     * @param id артикул продукта
+     *
+     * @param id    артикул продукта
      * @param model модель страницы
      * @return страница "currentproduct" или страница "error", если продукта с таким артикулом нет
      */
@@ -97,6 +100,7 @@ public class ProductController {
 
     /**
      * Получение страницы добавления нового товара.
+     *
      * @param model модель страницы
      * @return страница "addproduct"
      */
@@ -108,6 +112,7 @@ public class ProductController {
 
     /**
      * Обработка добавления нового товара.
+     *
      * @param product класс продукта
      * @return перенаправление на адрес "/products"
      */
@@ -121,7 +126,8 @@ public class ProductController {
 
     /**
      * Обработка обновления продукта.
-     * @param product класс продукта
+     *
+     * @param product      класс продукта
      * @param needToDelete необходимость удаления изображения продукта
      * @return перенаправление на адрес "/product/{id}"
      */
@@ -142,6 +148,7 @@ public class ProductController {
 
     /**
      * Обработка удаления продукта.
+     *
      * @param vendorCode артикул продукта
      * @return перенаправление на адрес "/products"
      */
@@ -153,7 +160,8 @@ public class ProductController {
 
     /**
      * Получение и отправка изображения продукта.
-     * @param id артикул продукта
+     *
+     * @param id       артикул продукта
      * @param response класс ответа
      */
     @RequestMapping(value = "/product/imageDisplay", method = RequestMethod.GET)
@@ -168,6 +176,7 @@ public class ProductController {
 
     /**
      * Добавление на модель страницы списка товаров в корзине и кнопок, если пользователь - админ.
+     *
      * @param model модель страницы
      */
     private void setProductsOnModel(Model model) {

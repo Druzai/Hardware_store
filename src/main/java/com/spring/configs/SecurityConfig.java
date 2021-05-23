@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Бин с созданием шифровщика паролей на основе алгоритма bcrypt.
+     *
      * @return Шифровщик паролей на основе алгоритма bcrypt
      */
     @Bean
@@ -38,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Задание конфигурации для Spring Security.
+     *
      * @param http класс конфигурации для Spring Security
      */
     @Override
@@ -72,6 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Бин с созданием менеджера аутентификации.
+     *
      * @return менеджер аутентификации
      */
     @Bean
@@ -81,6 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Задание менеджера аутентификации.
+     *
      * @param auth сборщик менеджера аутентификации
      */
     @Autowired

@@ -28,6 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     /**
      * Получение пользователя для Spring Security.
+     *
      * @param username логин пользователя
      * @return класс пользователя
      */

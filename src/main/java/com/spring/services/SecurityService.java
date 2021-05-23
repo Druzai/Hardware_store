@@ -35,6 +35,7 @@ public class SecurityService {
 
     /**
      * Проверка что пользователь аутентифицировался.
+     *
      * @return успешный вход или нет
      */
     public boolean isAuthenticated() {
@@ -48,6 +49,7 @@ public class SecurityService {
 
     /**
      * Автоматический вход в аккаунт.
+     *
      * @param username логин пользователя
      * @param password пароль пользователя
      */

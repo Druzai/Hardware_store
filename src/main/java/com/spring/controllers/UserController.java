@@ -47,6 +47,7 @@ public class UserController {
 
     /**
      * Получение страницы регистрации.
+     *
      * @param model модель страницы
      * @return страница "registration"
      */
@@ -64,9 +65,10 @@ public class UserController {
 
     /**
      * Обработка регистрации пользователя.
-     * @param userForm класс пользователя
+     *
+     * @param userForm      класс пользователя
      * @param bindingResult класс содержащий ошибки проверки при HTTP запросе
-     * @param model модель страницы
+     * @param model         модель страницы
      * @return перенаправление на адрес "/"
      */
     @PostMapping("/registration")
@@ -86,8 +88,9 @@ public class UserController {
 
     /**
      * Получение страницы входа.
-     * @param model модель страницы
-     * @param error строка ошибок
+     *
+     * @param model  модель страницы
+     * @param error  строка ошибок
      * @param logout строка выхода из аккаунта
      * @return страница "login"
      */
@@ -108,6 +111,7 @@ public class UserController {
 
     /**
      * Получение страницы личного кабинета пользователя.
+     *
      * @param model модель страницы
      * @return страница "user"
      */
@@ -122,8 +126,9 @@ public class UserController {
 
     /**
      * Обработка изменения роли пользователя.
+     *
      * @param userForm класс пользователя
-     * @param model модель страницы
+     * @param model    модель страницы
      * @return страница "user"
      */
     @PostMapping("/user")

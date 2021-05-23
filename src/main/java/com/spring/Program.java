@@ -17,6 +17,7 @@ public class Program {
 
     /**
      * Точка входа.
+     *
      * @param args аргументы запуска
      */
     public static void main(String[] args) {
@@ -25,6 +26,7 @@ public class Program {
 
     /**
      * Бин с проверкой что в таблице "role" есть роли и добавление этих ролей если нету.
+     *
      * @param roleRepository репозиторий связанный с таблицей "role"
      * @return аргументы для передачи в stdout командной строки
      */

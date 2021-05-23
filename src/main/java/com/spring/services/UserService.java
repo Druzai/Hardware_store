@@ -30,6 +30,7 @@ public class UserService {
 
     /**
      * Сохранение пользователя.
+     *
      * @param user класс пользователя
      */
     @Transactional
@@ -41,6 +42,7 @@ public class UserService {
 
     /**
      * Получение пользователя с заданным логином.
+     *
      * @param username логин пользователя
      * @return класс пользователя
      */
@@ -52,6 +54,7 @@ public class UserService {
 
     /**
      * Получение текущего пользователя.
+     *
      * @return класс пользователя
      */
     @Transactional(readOnly = true)

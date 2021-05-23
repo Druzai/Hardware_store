@@ -34,13 +34,14 @@ public class CartController {
 
     /**
      * Получение страницы с корзиной с продуктами пользователя.
+     *
      * @param model модель страницы
      * @return страница "cart"
      */
     @GetMapping()
     public String getCart(Model model) {
         var usersProducts = userService.getUser().getProducts();
-        var sum = usersProducts.stream().mapToInt(Product::getPrice).sum();
+        var sum = usersProducts.stream().mapToDouble(Product::getPrice).sum();
         var usersProductsSorted = productService.sortProducts(usersProducts);
         model.addAttribute("products", usersProductsSorted);
         model.addAttribute("productsSumm", sum);
@@ -49,6 +50,7 @@ public class CartController {
 
     /**
      * Добавление продукта в корзину пользователя.
+     *
      * @param vendorCode артикул продукта
      * @return перенаправление на адрес "/cart"
      */
@@ -64,6 +66,7 @@ public class CartController {
 
     /**
      * Удаление продукта из корзины пользователя.
+     *
      * @param vendorCode артикул продукта
      * @return перенаправление на адрес "/cart"
      */
@@ -79,6 +82,7 @@ public class CartController {
 
     /**
      * Удаление всех продуктов из корзины пользователя.
+     *
      * @return перенаправление на адрес "/cart"
      */
     @PostMapping("/deleteall")
@@ -91,6 +95,7 @@ public class CartController {
 
     /**
      * Обработка заказа выбранных товаров и выдача страницы.
+     *
      * @param model модель страницы
      * @return страница "thanksforbuying"
      */

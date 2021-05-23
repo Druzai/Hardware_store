@@ -21,6 +21,7 @@ public class UserValidator implements Validator {
 
     /**
      * Проверка класса на то, что он является классом "User".
+     *
      * @param aClass проверяемый класс
      * @return проверяемый класс является классом "User" или нет
      */
@@ -31,7 +32,8 @@ public class UserValidator implements Validator {
 
     /**
      * Проверка логина и пароля пользователя на соответствие.
-     * @param o объект пользователя
+     *
+     * @param o      объект пользователя
      * @param errors объект хранения ошибок, если логин или пароль пользователя не прошли проверку
      */
     @Override

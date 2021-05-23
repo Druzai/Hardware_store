@@ -29,7 +29,8 @@ public class Product {
     /**
      * Представление файла картинки в памяти.
      */
-    @Transient @JsonIgnore
+    @Transient
+    @JsonIgnore
     private MultipartFile multipartFile;
     /**
      * Название продукта.
@@ -58,7 +59,7 @@ public class Product {
     /**
      * Цена продукта.
      */
-    private int price;
+    private double price;
     /**
      * Вес продукта.
      */
@@ -78,18 +79,19 @@ public class Product {
 
     /**
      * Инициализация продукта со всеми полями.
-     * @param name название продукта
-     * @param description описание продукта
-     * @param imageBytes массив байтов, представляющий картинку
-     * @param brand брэнд продукта
-     * @param material материал продукта
+     *
+     * @param name                название продукта
+     * @param description         описание продукта
+     * @param imageBytes          массив байтов, представляющий картинку
+     * @param brand               брэнд продукта
+     * @param material            материал продукта
      * @param manufacturerCountry страна изготовления продукта
-     * @param category категория продукта
-     * @param price цена продукта
-     * @param weight вес продукта
+     * @param category            категория продукта
+     * @param price               цена продукта
+     * @param weight              вес продукта
      */
     public Product(String name, String description, byte[] imageBytes, String brand, String material,
-                   String manufacturerCountry, String category, int price, double weight) {
+                   String manufacturerCountry, String category, double price, double weight) {
         this.name = name;
         this.description = description;
         this.imageBytes = imageBytes;

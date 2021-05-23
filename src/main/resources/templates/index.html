@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div th:each="el : ${products}" class="carousel-item">
+            <div th:if="${products != null}" th:each="el : ${products}" class="carousel-item">
                 <div class="mt-2 card bg-light d-block w-100"
                      style="margin: 10px; border-radius: 7px">
                     <div class="text-center">
