@@ -14,7 +14,14 @@ public class HomeController {
     private ProductService productService;
 
     @GetMapping("/")
-    public String getIndex() {
+    public String getIndex(Model model) {
+        var products = productService.getAllProducts();
+        products = products.subList(0, Math.min(products.size(), 10));
+        if (products.size() > 1) {
+            model.addAttribute("firstProduct", products.get(0));
+            model.addAttribute("products", products.subList(1, products.size()));
+        } else
+            model.addAttribute("firstProduct", null);
         return "index";
     }
 

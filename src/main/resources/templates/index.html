@@ -11,9 +11,62 @@
 </head>
 <body>
 <nav th:replace="/parts/navbar :: navbar"></nav>
-<div class="m-5">
-    <p class="text-center">Nothing here for now...</p>
+
+<div class="m-5 text-center">
+    <h2>Добро пожаловать на главную страницу магазина "СтройТорг"!</h2>
+    <h2>Список нескольких товаров:</h2>
+    <h2 th:if="${firstProduct == null}">Пока их нету...</h2>
+    <div th:if="${firstProduct != null}" id="carouselExampleControls" class="carousel carousel-dark slide w-75 mx-auto" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="mt-2 card bg-light d-block w-100" style="margin: 10px; border-radius: 7px">
+                    <div class="text-center">
+                        <img th:if="${firstProduct.imageBytes != null}"
+                             th:src="@{'/product/imageDisplay?id=' + ${firstProduct.vendorCode}}"
+                             class="w-25 р-25 m-1 rounded-3" alt="Фото товара"/>
+                        <img th:if="${firstProduct.imageBytes == null}" th:src="@{/img/image-placeholder.png}"
+                             class="w-25 р-25 m-1"
+                             alt="Фото товара нету"/>
+                    </div>
+                    <div class="mt-auto" style="bottom: 0">
+                        <h2 th:text="'Артикул: ' + ${firstProduct.vendorCode}"></h2>
+                        <h3 th:text="'Название: ' + ${firstProduct.name}"></h3>
+                        <p th:text="'Цена: ' + ${firstProduct.price} + ' руб.'"></p>
+                        <a th:href="'/product/'+ ${firstProduct.vendorCode}">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div th:each="el : ${products}" class="carousel-item">
+                <div class="mt-2 card bg-light d-block w-100"
+                     style="margin: 10px; border-radius: 7px">
+                    <div class="text-center">
+                        <img th:if="${el.imageBytes != null}"
+                             th:src="@{'/product/imageDisplay?id=' + ${el.vendorCode}}"
+                             class="w-25 р-25 m-1 rounded-3" alt="Фото товара"/>
+                        <img th:if="${el.imageBytes == null}" th:src="@{/img/image-placeholder.png}"
+                             class="w-25 р-25 m-1"
+                             alt="Фото товара нету"/>
+                    </div>
+                    <div class="mt-auto" style="bottom: 0">
+                        <h2 th:text="'Артикул: ' + ${el.vendorCode}"></h2>
+                        <h3 th:text="'Название: ' + ${el.name}"></h3>
+                        <p th:text="'Цена: ' + ${el.price} + ' руб.'"></p>
+                        <a th:href="'/product/'+ ${el.vendorCode}">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>
+    </div>
 </div>
+
 <footer th:replace="/parts/footer :: footer"></footer>
 <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js/}"></script>
 <script type="text/javascript" th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>

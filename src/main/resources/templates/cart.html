@@ -26,13 +26,13 @@
                         <img th:if="${el.imageBytes == null}" th:src="@{/img/image-placeholder.png}" class="w-25 р-25 m-1"
                              alt="Фото товара нету"/>
                     </div>
-                    <div class="mt-auto" style="bottom: 0">
+                    <div class="mt-auto mx-auto text-center" style="bottom: 0">
                         <h2 th:text="'Артикул: ' + ${el.vendorCode}"></h2>
                         <h3 th:text="'Название: ' + ${el.name}"></h3>
                         <p th:text="'Цена: ' + ${el.price} + ' руб.'"></p>
                         <p th:text="'Вес: ' + ${el.weight} + ' кг'"></p>
                         <p th:text="'Описание: ' + ${el.description}"></p>
-                        <div class="d-flex align-content-center">
+                        <div class="d-flex justify-content-center align-items-center">
                             <form th:action="@{/cart/delete}" method="POST">
                                 <input type="hidden" name="vendorCode" th:value="${el.vendorCode}">
                                 <button type="submit" class="btn btn-primary btn-small"
