@@ -1,6 +1,5 @@
 package com.spring.controllers;
 
-import com.spring.entity.ImageFile;
 import com.spring.models.Product;
 import com.spring.services.ProductService;
 import com.spring.services.SecurityService;
@@ -63,7 +62,6 @@ public class ProductController {
             boolean imgExists = product.get().getImageBytes() != null && product.get().getImageBytes().length != 0;
             model.addAttribute("imgExists", imgExists);
             model.addAttribute("needToDelete", imgExists);
-            model.addAttribute("img", new ImageFile());
             model.addAttribute("product", product.get());
             return "currentproduct";
         } else {
@@ -74,28 +72,25 @@ public class ProductController {
 
     @GetMapping("/product/add")
     public String addProductPage(Model model) {
-        model.addAttribute("img", new ImageFile());
         model.addAttribute("product", new Product());
         return "addproduct";
     }
 
     @PostMapping("/product/add")
-    public String addProduct(@ModelAttribute("product") Product product,
-                             @ModelAttribute("img") ImageFile imageFile) throws IOException {
-        if (imageFile.getMultipartFile().getBytes() != null && imageFile.getMultipartFile().getBytes().length != 0)
-            product.setImageBytes(imageFile.getMultipartFile().getBytes());
+    public String addProduct(@ModelAttribute("product") Product product) throws IOException {
+        if (product.getMultipartFile().getBytes() != null && product.getMultipartFile().getBytes().length != 0)
+            product.setImageBytes(product.getMultipartFile().getBytes());
         productService.addProduct(product);
         return "redirect:/products";
     }
 
     @PostMapping("/product/update")
     public String updateProduct(@ModelAttribute("product") Product product,
-                                @ModelAttribute("img") ImageFile imageFile,
                                 @RequestParam(value="needToDelete", required=false) boolean needToDelete) throws IOException {
-        if (imageFile.getMultipartFile().getBytes() != null && imageFile.getMultipartFile().getBytes().length != 0
+        if (product.getMultipartFile().getBytes() != null && product.getMultipartFile().getBytes().length != 0
                 && !needToDelete)
-            product.setImageBytes(imageFile.getMultipartFile().getBytes());
-        else if ((imageFile.getMultipartFile().getBytes() == null || imageFile.getMultipartFile().getBytes().length == 0)
+            product.setImageBytes(product.getMultipartFile().getBytes());
+        else if ((product.getMultipartFile().getBytes() != null || product.getMultipartFile().getBytes().length != 0)
                 && !needToDelete)
             product.setImageBytes(productService.getProduct(product.getVendorCode()).get().getImageBytes());
         else

@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/product/{vendorCode:\\d+}",
                         "/product/imageDisplay**",
                         "/search**"
-//                        "/**"
                 ).permitAll()
                 .antMatchers("/product/add", "/product/update", "/product/delete", "/cart**").authenticated()
                 .anyRequest().authenticated()
@@ -52,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400)
                 .and()
                 .logout()
-//                .deleteCookies("JSESSIONID")
+                .deleteCookies("JSESSIONID")
                 .deleteCookies("remember-me")
                 .permitAll();
     }

@@ -1,6 +1,8 @@
 package com.spring.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,6 +17,8 @@ public class Product {
     private int vendorCode;
     @Lob
     private byte[] imageBytes;
+    @Transient @JsonIgnore
+    private MultipartFile multipartFile;
     private String name;
     private String description;
     private String brand;
@@ -30,10 +34,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String description, String brand, String material, String manufacturerCountry,
-                   String category, int price, double weight) {
+    public Product(String name, String description, byte[] imageBytes, String brand, String material,
+                   String manufacturerCountry, String category, int price, double weight) {
         this.name = name;
         this.description = description;
+        this.imageBytes = imageBytes;
         this.brand = brand;
         this.material = material;
         this.manufacturerCountry = manufacturerCountry;

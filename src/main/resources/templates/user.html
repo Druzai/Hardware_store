@@ -14,7 +14,7 @@
 <nav th:replace="/parts/navbar :: navbar"></nav>
 
 <div class="m-5 text-center">
-    <p>Добро пожаловать <span sec:authentication="name"></span></p>
+    <p>Добро пожаловать в личный кабинет "<span sec:authentication="name"></span>"</p>
     <p th:if="${userRole != ''}" th:text="'Все ваши роли: ' + ${userRole}"></p>
     <p th:if="${userRole == ''}">У вас нет ролей :(</p>
     <p>Список всех ролей:</p>

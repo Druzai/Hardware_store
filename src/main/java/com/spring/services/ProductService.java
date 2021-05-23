@@ -5,6 +5,7 @@ import com.spring.repositories.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +18,22 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Transactional(readOnly = true)
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<List<Product>> getAllSortedProducts() {
         return sortProducts(productRepository.findAll());
     }
 
+    @Transactional(readOnly = true)
     public List<List<Product>> searchProductsSorted(String searchQuery) {
         return sortProducts(productRepository.search(searchQuery.toLowerCase()));
     }
 
+    @Transactional(readOnly = true)
     public Optional<Product> getProduct(int vendorId) {
         var getProduct = productRepository.findById(vendorId);
         if (getProduct.isPresent())
@@ -38,12 +43,14 @@ public class ProductService {
         return getProduct;
     }
 
+    @Transactional
     public Product addProduct(Product newProduct) {
         log.info("Add new product");
         productRepository.save(newProduct);
         return newProduct;
     }
 
+    @Transactional
     public Product updateProduct(int vendorId, Product newProduct) {
         var oldProduct = getProduct(vendorId);
         if (oldProduct.isEmpty())
@@ -56,6 +63,7 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public boolean deleteProduct(int vendorId) {
         var currentProduct = getProduct(vendorId);
         if (currentProduct.isPresent()) {
