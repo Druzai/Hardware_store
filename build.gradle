@@ -16,6 +16,10 @@ configurations {
 
 compileJava.options.compilerArgs << "-parameters"
 
+test {
+    useJUnitPlatform()
+}
+
 javadoc {
     options.encoding = 'UTF-8'
 }
@@ -33,6 +37,7 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'commons-beanutils:commons-beanutils:1.9.3'
     implementation 'org.hibernate.validator:hibernate-validator:7.0.1.Final'
+    implementation 'junit:junit:4.12'
     runtimeOnly 'mysql:mysql-connector-java'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
