@@ -5,7 +5,7 @@ plugins {
 }
 
 
-group 'com.spring'
+group 'com.app'
 version '1.0.0'
 
 configurations {
@@ -30,18 +30,18 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-security:1.5.8.RELEASE'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-    implementation 'commons-beanutils:commons-beanutils:1.9.3'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.5.4'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
+    implementation 'commons-beanutils:commons-beanutils:20030211.134440'
     implementation 'org.hibernate.validator:hibernate-validator:7.0.1.Final'
-    implementation 'junit:junit:4.12'
-    runtimeOnly 'mysql:mysql-connector-java'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'junit:junit:4.13.2'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.25'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
     implementation 'org.webjars:bootstrap:5.0.1'
     implementation 'org.webjars:jquery:3.6.0'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
 }
