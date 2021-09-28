@@ -1,0 +1,7 @@
+com.app
+com.app.components
+com.app.configs
+com.app.controllers
+com.app.models
+com.app.repositories
+com.app.services
